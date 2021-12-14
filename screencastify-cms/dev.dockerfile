@@ -1,5 +1,5 @@
 # https://docs.docker.com/samples/library/node/
-ARG NODE_VERSION=12.10.0
+ARG NODE_VERSION=16.13.1
 
 FROM node:${NODE_VERSION}-alpine
 
