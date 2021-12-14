@@ -1,34 +1,34 @@
 version: '3'
 services:
   devbox:
-    container_name: dev-service-name
+    container_name: dev-keystone
     build:
       context: .
-      dockerfile: devbox.dockerfile
+      dockerfile: dev.dockerfile
     volumes:
         - .:/home/node/app
         - node_modules:/home/node/app/node_modules
     environment:
-        - DATABASE_URL=postgres://user:password@postgres:5432/database-name
+        - DATABASE_URL=postgres://user:password@postgres:5432/keystone
     ports:
     - "3000:3000"
     command: ["yarn", "dev"]
     links:
         - postgres
-  production-server:
-    container_name: service-name
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-        - .:/app
-    environment:
-        - DATABASE_URL=postgres://user:password@postgres:5432/database-name
-    ports:
-    - "3000:3000"
-    command: ["./dumb-init", "yarn", "start"]
-    links:
-        - postgres
+  # production-server:
+  #   container_name: service-name
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #       - .:/app
+  #   environment:
+  #       - DATABASE_URL=postgres://user:password@postgres:5432/database-name
+  #   ports:
+  #   - "3000:3000"
+  #   command: ["./dumb-init", "yarn", "start"]
+  #   links:
+  #       - postgres
   postgres:
     image: "postgres:12"
     container_name: "postgres"
